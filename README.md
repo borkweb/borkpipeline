@@ -58,7 +58,7 @@ flowchart LR
 Install PyPipeline via pip:
 
 ```bash
-pip install borkweb/borkpipeline
+pip install borkpipeline
 ```
 
 ## Getting started
