@@ -90,7 +90,7 @@ flowchart LR
 ```
 
 ```python
-from your_pipeline_module import Pipeline
+from pypipeline import Pipeline
 
 # Create a new pipeline instance.
 pipeline = Pipeline()
@@ -126,7 +126,7 @@ flowchart LR
 ```
 
 ```python
-from your_pipeline_module import Pipeline
+from pypipeline import Pipeline
 
 # Create a new pipeline instance.
 pipeline = Pipeline()
@@ -172,7 +172,7 @@ flowchart LR
 ```
 
 ```python
-from your_pipeline_module import Pipeline
+from pypipeline import Pipeline
 
 pipeline = Pipeline()
 
@@ -231,7 +231,7 @@ flowchart LR
 ```
 
 ```python
-from your_pipeline_module import Pipeline
+from pypipeline import Pipeline
 
 pipeline = Pipeline().through([CapitalizePipe(), StripPipe()])
 result = pipeline.send('   hello world   ').then_return()
@@ -277,7 +277,7 @@ flowchart LR
 ```
 
 ```python
-from your_pipeline_module import Pipeline
+from pypipeline import Pipeline
 
 pipeline = Pipeline().via('execute').through([StripPipe(), ReversePipe()])
 result = pipeline.send('     hello      ').then_return()
@@ -293,7 +293,7 @@ can do this with a `return` statement!
 #### Example pipeline
 
 ```python
-from your_pipeline_module import Pipeline
+from pypipeline import Pipeline
 
 def check_content(passable, next_pipe):
     if 'stop' in passable:
@@ -331,7 +331,7 @@ flowchart LR
 ```
 
 ```python
-from your_pipeline_module import Pipeline
+from pypipeline import Pipeline
 
 pipeline = Pipeline().through([str.strip, str.upper])
 result = pipeline.send('   hello world   ').then(lambda x: len(x))

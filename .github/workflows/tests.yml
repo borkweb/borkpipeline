@@ -2,7 +2,13 @@ name: Tests
 
 on:
   pull_request:
+    paths:
+      - 'tests/**.py'
+      - 'pypipeline/**.py'
   push:
+    paths:
+      - 'tests/**.py'
+      - 'pypipeline/**.py'
 
 jobs:
   build:
