@@ -1,6 +1,6 @@
 # PipelineChain
 
-[![Tests](https://github.com/borkweb/pipelinechain/workflows/Tests/badge.svg)](https://github.com/borkweb/pipelinechain/actions?query=branch%3Amain)
+[![Tests](https://github.com/borkweb/python-pipelinechain/workflows/Tests/badge.svg)](https://github.com/borkweb/python-pipelinechain/actions?query=branch%3Amain)
 
 A Pipeline / [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility) design pattern implementation based on [Laravel's Pipeline implementation](https://github.com/illuminate/pipeline/blob/master/Pipeline.python).
 
