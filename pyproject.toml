@@ -20,4 +20,4 @@ keywords = ["pipeline", "library"]
 requires-python = ">=3.8"
 
 [project.urls]
-Homepage = "https://github.com/borkweb/pipelinechain"
+Homepage = "https://github.com/borkweb/python-pipelinechain"
