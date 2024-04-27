@@ -1,6 +1,6 @@
 # PyPipeline
 
-[![Tests](https://github.com/borkweb/pypipeline/workflows/Tests/badge.svg)](https://github.com/borkweb/pypipeline/actions?query=branch%3Amain) [![Static Analysis](https://github.com/borkweb/pypipeline/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/borkweb/pypipeline/actions/workflows/static-analysis.yml)
+[![Tests](https://github.com/borkweb/pypipeline/workflows/Tests/badge.svg)](https://github.com/borkweb/pypipeline/actions?query=branch%3Amain)
 
 A Pipeline / [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility) design pattern implementation based on [Laravel's Pipeline implementation](https://github.com/illuminate/pipeline/blob/master/Pipeline.python).
 
