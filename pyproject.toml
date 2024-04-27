@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pipelinechain"
-version = "1.0.0"
+version = "1.0.1"
 description = "A library that implements the Chain of Responsibility pattern."
 readme = "README.md"
 authors = [{ name = "Matthew Batchelder", email = "borkweb@gmail.com" }]
