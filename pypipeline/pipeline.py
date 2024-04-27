@@ -85,7 +85,7 @@ class Pipeline:
             Pipeline: Self
         """
         if not isinstance(pipes, list):
-            pipes = list(pipes)
+            pipes = [pipes]
         self.pipes.extend(pipes)
         return self
 
@@ -176,7 +176,7 @@ class Pipeline:
         Returns:
             Pipeline: Self
         """
-        self.pipes = list(pipes) if isinstance(pipes, list) else list(pipes)
+        self.pipes = list(pipes)
         return self
 
     def via(self, method: str) -> 'Pipeline':

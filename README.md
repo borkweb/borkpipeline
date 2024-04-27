@@ -78,7 +78,7 @@ pipeline to do that like so:
 flowchart LR
 	input[String]
 	subgraph Pipeline
-		pipe1[capitalize]
+		pipe1[title]
 		pipe2[trim]
 
 		pipe1 --> pipe2
@@ -90,14 +90,14 @@ flowchart LR
 ```
 
 ```python
-from pypipeline import Pipeline
+from pypipeline.pipeline import Pipeline
 
 # Create a new pipeline instance.
 pipeline = Pipeline()
 
 # Send a string through the pipeline.
 result = pipeline.send('   hello world   ').through([
-    str.capitalize,
+    str.title,
     str.strip
 ]).then_return()
 
@@ -112,7 +112,7 @@ You don't need to build the pipeline all at once, you can spread it out over a n
 flowchart LR
 	input[String]
 	subgraph Pipeline
-		pipe1[capitalize]
+		pipe1[title]
 		pipe2[trim]
 		pipe3[reverse_string]
 
@@ -126,28 +126,25 @@ flowchart LR
 ```
 
 ```python
-from pypipeline import Pipeline
+from pypipeline.pipeline import Pipeline
 
 # Create a new pipeline instance.
 pipeline = Pipeline()
 
 # Set the pipes you want to use.
-pipeline.through([
-    str.capitalize,
-    str.strip
-])
+pipeline.through([ str.title, str.strip ])
 
 # Add another transformation.
-def reverse_string(s):
-    return s[::-1]
+def replace(s):
+    return s.replace('Hello', 'Goodbye')
 
 # Add it to the pipeline.
-pipeline.pipe(reverse_string)
+pipeline.pipe(replace)
 
 # Send data through the pipeline.
 result = pipeline.send('   hello world   ').then_return()
 
-print(result)  # Output: 'dlrow olleh'
+print(result)  # Output: 'Goodbye World'
 ```
 
 ### Using custom pipes
@@ -172,7 +169,7 @@ flowchart LR
 ```
 
 ```python
-from pypipeline import Pipeline
+from pypipeline.pipeline import Pipeline
 
 pipeline = Pipeline()
 
@@ -180,13 +177,11 @@ def custom_pipe(passable, next_pipe):
     passable = passable.replace('hello', 'goodbye')
     return next_pipe(passable)
 
-pipeline.through([
-    custom_pipe,
-    str.capitalize
-])
+pipeline.through([custom_pipe, str.title])
 
 result = pipeline.send('hello world').then_return()
 print(result)  # Output: 'Goodbye world'
+
 ```
 
 ### Using classes with the `handle` method
@@ -201,9 +196,9 @@ optionally implement the `StellarWP\Pipeline\Contracts\Pipe` interface to enforc
 
 First class:
 ```python
-class CapitalizePipe:
+class TitlePipe:
     def handle(self, passable, next_pipe):
-        return next_pipe(passable.capitalize())
+        return next_pipe(passable.title())
 ```
 
 Second class:
@@ -219,7 +214,7 @@ class StripPipe:
 flowchart LR
 	input[String]
 	subgraph Pipeline
-		pipe1[CapitalizePipe::handle]
+		pipe1[TitlePipe::handle]
 		pipe2[StripPipe::handle]
 
 		pipe1 --> pipe2
@@ -231,9 +226,9 @@ flowchart LR
 ```
 
 ```python
-from pypipeline import Pipeline
+from pypipeline.pipeline import Pipeline
 
-pipeline = Pipeline().through([CapitalizePipe(), StripPipe()])
+pipeline = Pipeline().through([TitlePipe(), StripPipe()])
 result = pipeline.send('   hello world   ').then_return()
 print(result)  # Output: 'Hello world'
 ```
@@ -247,9 +242,9 @@ the alternate method name using the `via()` method.
 
 First class:
 ```python
-class ReversePipe:
+class TitlePipe:
     def execute(self, passable, next_pipe):
-        return next_pipe(passable[::-1])
+        return next_pipe(passable.title())
 ```
 
 Second class:
@@ -277,11 +272,11 @@ flowchart LR
 ```
 
 ```python
-from pypipeline import Pipeline
+from pypipeline.pipeline import Pipeline
 
 pipeline = Pipeline().via('execute').through([StripPipe(), ReversePipe()])
 result = pipeline.send('     hello      ').then_return()
-print(result)  # Output: 'olleh'
+print(result)  # Output: 'Hello'
 
 ```
 
@@ -293,7 +288,7 @@ can do this with a `return` statement!
 #### Example pipeline
 
 ```python
-from pypipeline import Pipeline
+from pypipeline.pipeline import Pipeline
 
 def check_content(passable, next_pipe):
     if 'stop' in passable:
@@ -331,7 +326,7 @@ flowchart LR
 ```
 
 ```python
-from pypipeline import Pipeline
+from pypipeline.pipeline import Pipeline
 
 pipeline = Pipeline().through([str.strip, str.upper])
 result = pipeline.send('   hello world   ').then(lambda x: len(x))
@@ -358,7 +353,7 @@ pipeline.pipe( str.strip )
 # or
 pipeline.add_pipe( str.strip )
 # or
-pipeline.pipe( [ str.capitalize, str.strip ] )
+pipeline.pipe( [ str.title, str.strip ] )
 ```
 
 ### `send()`
@@ -438,16 +433,16 @@ Aliases: `pipes()`
 #### Examples
 ```python
 # You can provide any number of pipes.
-pipeline.through([ str.capitalize, str.strip ])
+pipeline.through([ str.title, str.strip ])
 
 # Using the alias.
-pipeline.pipes([ str.capitalize, str.strip ])
+pipeline.pipes([ str.title, str.strip ])
 
 # Pass closures as pipes.
-pipeline.through([ str.capitalize, lambda passable, next: next_pipe(passable.strip)])
+pipeline.through([ str.title, lambda passable, next: next_pipe(passable.strip)])
 
 # Pass objects as pipes.
-pipeline.through([ CapitalizePipe(), StripPipe() ])
+pipeline.through([ TitlePipe(), StripPipe() ])
 ```
 
 ### `via()`
