@@ -107,3 +107,6 @@ Pipfile.lock
 
 # Temporary testing file
 notebooks/debug*.py
+
+# Editors
+.idea
