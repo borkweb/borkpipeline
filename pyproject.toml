@@ -5,7 +5,7 @@ requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "borkpipeline"
+name = "pipelinechain"
 version = "1.0.0"
 description = "A library that implements the Chain of Responsibility pattern."
 readme = "README.md"
@@ -20,4 +20,4 @@ keywords = ["pipeline", "library"]
 requires-python = ">=3.8"
 
 [project.urls]
-Homepage = "https://github.com/borkweb/borkpipeline"
+Homepage = "https://github.com/borkweb/pipelinechain"

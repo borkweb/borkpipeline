@@ -1,6 +1,6 @@
-# BorkPipeline
+# PipelineChain
 
-[![Tests](https://github.com/borkweb/borkpipeline/workflows/Tests/badge.svg)](https://github.com/borkweb/borkpipeline/actions?query=branch%3Amain)
+[![Tests](https://github.com/borkweb/pipelinechain/workflows/Tests/badge.svg)](https://github.com/borkweb/pipelinechain/actions?query=branch%3Amain)
 
 A Pipeline / [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility) design pattern implementation based on [Laravel's Pipeline implementation](https://github.com/illuminate/pipeline/blob/master/Pipeline.python).
 
@@ -58,7 +58,7 @@ flowchart LR
 Install PyPipeline via pip:
 
 ```bash
-pip install borkpipeline
+pip install pipelinechain
 ```
 
 ## Getting started
@@ -90,7 +90,7 @@ flowchart LR
 ```
 
 ```python
-from borkpipeline.pipeline import Pipeline
+from pipelinechain import Pipeline
 
 # Create a new pipeline instance.
 pipeline = Pipeline()
@@ -126,7 +126,7 @@ flowchart LR
 ```
 
 ```python
-from borkpipeline.pipeline import Pipeline
+from pipelinechain import Pipeline
 
 # Create a new pipeline instance.
 pipeline = Pipeline()
@@ -169,7 +169,7 @@ flowchart LR
 ```
 
 ```python
-from borkpipeline.pipeline import Pipeline
+from pipelinechain import Pipeline
 
 pipeline = Pipeline()
 
@@ -226,7 +226,7 @@ flowchart LR
 ```
 
 ```python
-from borkpipeline.pipeline import Pipeline
+from pipelinechain import Pipeline
 
 pipeline = Pipeline().through([TitlePipe(), StripPipe()])
 result = pipeline.send('   hello world   ').then_return()
@@ -272,7 +272,7 @@ flowchart LR
 ```
 
 ```python
-from borkpipeline.pipeline import Pipeline
+from pipelinechain import Pipeline
 
 pipeline = Pipeline().via('execute').through([StripPipe(), ReversePipe()])
 result = pipeline.send('     hello      ').then_return()
@@ -288,7 +288,7 @@ can do this with a `return` statement!
 #### Example pipeline
 
 ```python
-from borkpipeline.pipeline import Pipeline
+from pipelinechain import Pipeline
 
 def check_content(passable, next_pipe):
     if 'stop' in passable:
@@ -326,7 +326,7 @@ flowchart LR
 ```
 
 ```python
-from borkpipeline.pipeline import Pipeline
+from pipelinechain import Pipeline
 
 pipeline = Pipeline().through([str.strip, str.upper])
 result = pipeline.send('   hello world   ').then(lambda x: len(x))

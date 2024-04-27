@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name='borkpipeline',
+    name='pipelinechain',
     packages=find_packages(),
     version='1.0.0',
     description='A library that implements the Chain of Responsibility pattern.',

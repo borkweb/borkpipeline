@@ -1,7 +1,9 @@
 from typing import Any, Callable, List, Optional, Union
+from dataclasses import dataclass
 from functools import reduce
 from inspect import signature
 
+@dataclass
 class Pipeline:
     """
     A Chain of Responsibility implementation adapted from https://github.com/stellarwp/pipeline

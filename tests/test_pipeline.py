@@ -1,4 +1,4 @@
-from borkpipeline.pipeline import Pipeline
+from pipelinechain import Pipeline
 import unittest
 
 class TestPipeline(unittest.TestCase):
