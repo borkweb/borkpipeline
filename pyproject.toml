@@ -1,0 +1,23 @@
+# pyproject.toml
+
+[build-sysetm]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pypipeline"
+version = "1.0.0"
+description = "A library that implements the Chain of Responsibility pattern."
+readme = "README.md"
+authors = [{ name = "Matthew Batchelder", email = "borkweb@gmail.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["pipeline", "library"]
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/borkweb/pypipeline"
