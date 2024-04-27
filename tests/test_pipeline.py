@@ -6,10 +6,10 @@ class TestPipeline(unittest.TestCase):
 
     def test_it_runs_a_pipeline_with_one_callable(self):
         pipeline = Pipeline()
-        result = pipeline.send('hello       ') \
+        result = pipeline.send('hello world       ') \
             .through([str.strip]) \
             .then_return()
-        self.assertEqual('hello', result)
+        self.assertEqual('hello world', result)
 
     def test_it_runs_a_pipeline_with_callables(self):
         pipeline = Pipeline()
@@ -93,20 +93,20 @@ class TestPipeline(unittest.TestCase):
     def test_it_runs_a_pipeline_by_sending_late(self):
         pipeline = Pipeline()
         pipeline.through([str.title, str.strip])
-        result = pipeline.send('hello       ') \
+        result = pipeline.send('hello world       ') \
             .then_return()
-        self.assertEqual('Hello', result)
+        self.assertEqual('Hello World', result)
 
     def test_it_runs_a_pipeline_setup_via_pipe(self):
         pipeline = Pipeline()
         pipeline.pipe([str.title, str.strip])
-        result = pipeline.send('hello       ') \
+        result = pipeline.send('hello world       ') \
             .then_return()
-        self.assertEqual('Hello', result)
+        self.assertEqual('Hello World', result)
 
     def test_it_bails_early(self):
         pipeline = Pipeline()
-        result = pipeline.send('bork') \
+        result = pipeline.send('hellow world     ') \
             .through([
                 lambda x, next_pipe: False,
                 str.strip
@@ -116,14 +116,14 @@ class TestPipeline(unittest.TestCase):
 
     def test_it_bails_in_the_middle(self):
         pipeline = Pipeline()
-        result = pipeline.send('bork        ') \
+        result = pipeline.send('hello world        ') \
             .through([
                 str.strip,
                 lambda x, next_pipe: x,
                 str.title
             ]) \
             .then()
-        self.assertEqual('bork', result)
+        self.assertEqual('hello world', result)
 
 if __name__ == '__main__':
     unittest.main()
