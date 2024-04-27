@@ -1,4 +1,5 @@
 from typing import Any, Callable, List, Optional, Union
+from functools import reduce
 from inspect import signature
 
 class Pipeline:
@@ -39,17 +40,23 @@ class Pipeline:
             Callable: The callable for the pipe.
         """
         def wrapper(passable):
-            print(passable)
             try:
-                # Determine how many parameters the current_pipe accepts
-                params = signature(current_pipe).parameters
-                if callable(current_pipe) and len(params) == 2 and 'next' in params:
+                params = None
+                if callable(current_pipe):
+                    params = signature(current_pipe).parameters
+
+                is_object = isinstance(current_pipe, object) and not isinstance(current_pipe, (int, float, str, bool, list, dict, tuple, set))
+                if is_object == True and hasattr(current_pipe, self.method):
+                    method = getattr(current_pipe, self.method, None)
+                    return method(passable, next_pipe)
+                elif callable(current_pipe) and 'next_pipe' in params:
                     return current_pipe(passable, next_pipe)
                 elif callable(current_pipe):
-                    result = current_pipe(passable)
-                    return next_pipe(result)
+                    passable = current_pipe(passable)
+                    return next_pipe(passable)
                 else:
                     raise TypeError("The pipe must be callable")
+
             except Exception as e:
                 return self.handle_exception(passable, e)
         return wrapper
@@ -146,11 +153,7 @@ class Pipeline:
         if destination is None:
             destination = lambda x: x
 
-        pipeline = self.prepare_destination(destination)
-
-        # We reverse the
-        for pipe in reversed(self.pipes):
-            pipeline = self.carry(pipeline, pipe)
+        pipeline = reduce(self.carry, reversed(self.pipes), self.prepare_destination(destination))
 
         return pipeline(self.passable)
 

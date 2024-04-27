@@ -176,9 +176,9 @@ from pypipeline import Pipeline
 
 pipeline = Pipeline()
 
-def custom_pipe(passable, next):
+def custom_pipe(passable, next_pipe):
     passable = passable.replace('hello', 'goodbye')
-    return next(passable)
+    return next_pipe(passable)
 
 pipeline.through([
     custom_pipe,
@@ -202,15 +202,15 @@ optionally implement the `StellarWP\Pipeline\Contracts\Pipe` interface to enforc
 First class:
 ```python
 class CapitalizePipe:
-    def handle(self, passable, next):
-        return next(passable.capitalize())
+    def handle(self, passable, next_pipe):
+        return next_pipe(passable.capitalize())
 ```
 
 Second class:
 ```python
 class StripPipe:
-    def handle(self, passable, next):
-        return next(passable.strip())
+    def handle(self, passable, next_pipe):
+        return next_pipe(passable.strip())
 ```
 
 #### Example pipeline
@@ -444,7 +444,7 @@ pipeline.through([ str.capitalize, str.strip ])
 pipeline.pipes([ str.capitalize, str.strip ])
 
 # Pass closures as pipes.
-pipeline.through([ str.capitalize, lambda passable, next: next(passable.strip)])
+pipeline.through([ str.capitalize, lambda passable, next: next_pipe(passable.strip)])
 
 # Pass objects as pipes.
 pipeline.through([ CapitalizePipe(), StripPipe() ])
